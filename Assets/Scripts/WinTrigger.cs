@@ -8,8 +8,14 @@ public class WinTrigger : Triggerable {
 
     public override void OnTrigger(GameObject source)
     {
-        currentPuzzle.Off(null);
-        nextPuzzle.On(null);
+        if (currentPuzzle != null)
+        {
+            currentPuzzle.Off(null);
+        }
+        if (nextPuzzle != null)
+        {
+            nextPuzzle.On(null);
+        }
     }
 
     // Use this for initialization
