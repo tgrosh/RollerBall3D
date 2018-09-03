@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fan : Switchable
 {
-    public bool running;
+    public bool running = true;
     public float fanForce;
     public float fanRange;
     public BoxCollider rangeCollider;
@@ -47,6 +47,10 @@ public class Fan : Switchable
 
     private void OnTriggerStay(Collider other)
     {
+        if (!running)
+        {
+            return;
+        }
         if (ballOnly && other.gameObject.GetComponentInParent<Ball>() == null)
         {
             return;

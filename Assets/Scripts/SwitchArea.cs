@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SwitchArea : Switchable {
     public bool persistent = false;
+    public bool inverse = false;
 
     List<Rigidbody> currentRoots = new List<Rigidbody>();
     bool areaActive = true;
@@ -40,9 +41,20 @@ public class SwitchArea : Switchable {
         {
             return;
         }
+
+        if (rootRigidBody.GetComponentInParent<Ball>() == null)
+        {
+            return;
+        }
         
         currentRoots.Add(rootRigidBody);
-        GetComponent<Switch>().On(gameObject, persistent);
+        if (!inverse)
+        {
+            GetComponent<Switch>().On(gameObject, persistent);
+        } else
+        {
+            GetComponent<Switch>().Off(gameObject);
+        }
     }
 
     void OnTriggerExit(Collider collider)
@@ -56,10 +68,22 @@ public class SwitchArea : Switchable {
             return;
         }
 
+        if (rootRigidBody.GetComponentInParent<Ball>() == null)
+        {
+            return;
+        }
+
         if (currentRoots.Contains(rootRigidBody))
         {
             currentRoots.Remove(rootRigidBody);
-            GetComponent<Switch>().Off(gameObject);
+            if (inverse)
+            {
+                GetComponent<Switch>().On(gameObject, persistent);
+            }
+            else
+            {
+                GetComponent<Switch>().Off(gameObject);
+            }
         }        
     }
 
