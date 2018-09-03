@@ -37,6 +37,7 @@ public class PuzzleManager : MonoBehaviour {
             Destroy(currentPuzzle.gameObject);
         }
         currentPuzzle = Instantiate(puzzles[puzzleIndex]);
+        currentPuzzle.gameObject.SetActive(true);
 
         if (ball != null)
         {
