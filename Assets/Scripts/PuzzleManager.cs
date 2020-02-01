@@ -43,7 +43,7 @@ public class PuzzleManager : MonoBehaviour {
         {
             Destroy(ball.gameObject);
         }
-        ball = Instantiate(ballPrefab, currentPuzzle.ballStart.position, Quaternion.identity);
+        ball = Instantiate(ballPrefab, currentPuzzle.ballStart.transform.position, Quaternion.identity);
 
         currentPuzzle.puzzleCamera.Follow = ball.transform;
         currentPuzzle.puzzleCamera.LookAt = ball.transform;

@@ -57,7 +57,10 @@ public class Fan : Switchable
         }
 
         Rigidbody otherBody = other.GetComponentInParent<Rigidbody>();
-        float fanRangeModifier = Vector3.Magnitude(other.transform.position - transform.position);
-        otherBody.AddForce(transform.right * fanForce * (Mathf.Max(fanRange-fanRangeModifier,0)));
+        if (otherBody != null)
+        {
+            float fanRangeModifier = Vector3.Magnitude(other.transform.position - transform.position);
+            otherBody.AddForce(transform.right * fanForce * (Mathf.Max(fanRange - fanRangeModifier, 0)));
+        }
     }
 }
